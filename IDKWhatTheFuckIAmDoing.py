@@ -6,8 +6,8 @@ from ta.momentum import RSIIndicator
 from ta.volatility import BollingerBands
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report  # Keep this line as it is
-from sklearn.exceptions import UndefinedMetricWarning  # Import UndefinedMetricWarning from sklearn.exceptions
+from sklearn.metrics import classification_report
+from sklearn.exceptions import UndefinedMetricWarning
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 import time
@@ -59,8 +59,6 @@ def fetch_data():
 def add_indicators(data):
     data['SMA_50'] = SMAIndicator(data['close'], window=50).sma_indicator()
     data['RSI'] = RSIIndicator(data['close'], window=14).rsi()
-    
-    # Bollinger Bands
     bb = BollingerBands(data['close'], window=20, window_dev=2)
     data['BB_Middle'] = bb.bollinger_mavg()
     data['BB_Upper'] = bb.bollinger_hband()
